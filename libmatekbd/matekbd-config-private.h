@@ -33,40 +33,22 @@ extern const gchar MATEKBD_PREVIEW_CONFIG_KEY_HEIGHT[];
 /**
  * General config functions (private)
  */
-extern void matekbd_keyboard_config_model_set (MatekbdKeyboardConfig *
-					    kbd_config,
-					    const gchar * model_name);
+extern void matekbd_keyboard_config_model_set(MatekbdKeyboardConfig *kbd_config,
+                                              const gchar *model_name);
 
-extern void matekbd_keyboard_config_options_set (MatekbdKeyboardConfig *
-					      kbd_config,
-					      gint idx,
-					      const gchar * group_name,
-					      const gchar * option_name);
-extern gboolean matekbd_keyboard_config_options_is_set (MatekbdKeyboardConfig *
-						     kbd_config,
-						     const gchar *
-						     group_name,
-						     const gchar *
-						     option_name);
+extern void matekbd_keyboard_config_options_set(
+    MatekbdKeyboardConfig *kbd_config, gint idx, const gchar *group_name,
+    const gchar *option_name);
+extern gboolean matekbd_keyboard_config_options_is_set(
+    MatekbdKeyboardConfig *kbd_config, const gchar *group_name,
+    const gchar *option_name);
 
-extern gboolean matekbd_keyboard_config_dump_settings (MatekbdKeyboardConfig *
-						    kbd_config,
-						    const char *file_name);
+extern gboolean matekbd_keyboard_config_dump_settings(
+    MatekbdKeyboardConfig *kbd_config, const char *file_name);
 
-extern gboolean matekbd_keyboard_config_get_lv_descriptions (XklConfigRegistry
-							  *
-							  config_registry,
-							  const gchar *
-							  layout_name,
-							  const gchar *
-							  variant_name,
-							  gchar **
-							  layout_short_descr,
-							  gchar **
-							  layout_descr,
-							  gchar **
-							  variant_short_descr,
-							  gchar **
-							  variant_descr);
+extern gboolean matekbd_keyboard_config_get_lv_descriptions(
+    XklConfigRegistry *config_registry, const gchar *layout_name,
+    const gchar *variant_name, gchar **layout_short_descr, gchar **layout_descr,
+    gchar **variant_short_descr, gchar **variant_descr);
 
 #endif

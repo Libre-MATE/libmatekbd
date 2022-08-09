@@ -21,50 +21,52 @@
 #define __MATEKBD_STATUS_H__
 
 #include <gtk/gtk.h>
-
 #include <libxklavier/xklavier.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-	typedef struct _MatekbdStatus MatekbdStatus;
-	typedef struct _MatekbdStatusPrivate MatekbdStatusPrivate;
-	typedef struct _MatekbdStatusClass MatekbdStatusClass;
+typedef struct _MatekbdStatus MatekbdStatus;
+typedef struct _MatekbdStatusPrivate MatekbdStatusPrivate;
+typedef struct _MatekbdStatusClass MatekbdStatusClass;
 
-	#define MATEKBD_TYPE_STATUS             (matekbd_status_get_type ())
-	#define MATEKBD_STATUS(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), MATEKBD_TYPE_STATUS, MatekbdStatus))
-	#define MATEKBD_STATUS_CLASS(obj)       (G_TYPE_CHECK_CLASS_CAST ((obj), MATEKBD_TYPE_STATUS,  MatekbdStatusClass))
-	#define MATEKBD_IS_STATUS(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MATEKBD_TYPE_STATUS))
-	#define MATEKBD_IS_STATUS_CLASS(obj)    (G_TYPE_CHECK_CLASS_TYPE ((obj), MATEKBD_TYPE_STATUS))
-	#define MATEKBD_STATUS_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), MATEKBD_TYPE_STATUS, MatekbdStatusClass))
+#define MATEKBD_TYPE_STATUS (matekbd_status_get_type())
+#define MATEKBD_STATUS(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), MATEKBD_TYPE_STATUS, MatekbdStatus))
+#define MATEKBD_STATUS_CLASS(obj) \
+  (G_TYPE_CHECK_CLASS_CAST((obj), MATEKBD_TYPE_STATUS, MatekbdStatusClass))
+#define MATEKBD_IS_STATUS(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE((obj), MATEKBD_TYPE_STATUS))
+#define MATEKBD_IS_STATUS_CLASS(obj) \
+  (G_TYPE_CHECK_CLASS_TYPE((obj), MATEKBD_TYPE_STATUS))
+#define MATEKBD_STATUS_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS((obj), MATEKBD_TYPE_STATUS, MatekbdStatusClass))
 
-	struct _MatekbdStatus {
-		GtkStatusIcon parent;
-		MatekbdStatusPrivate *priv;
-	};
+struct _MatekbdStatus {
+  GtkStatusIcon parent;
+  MatekbdStatusPrivate *priv;
+};
 
-	struct _MatekbdStatusClass {
-		GtkNotebookClass parent_class;
-	};
+struct _MatekbdStatusClass {
+  GtkNotebookClass parent_class;
+};
 
-	extern GType matekbd_status_get_type (void);
+extern GType matekbd_status_get_type(void);
 
-	extern GtkStatusIcon *matekbd_status_new (void);
+extern GtkStatusIcon *matekbd_status_new(void);
 
-	extern void matekbd_status_reinit_ui (MatekbdStatus * gki);
+extern void matekbd_status_reinit_ui(MatekbdStatus *gki);
 
-	extern void matekbd_status_set_angle (MatekbdStatus * gki,
-					   gdouble angle);
+extern void matekbd_status_set_angle(MatekbdStatus *gki, gdouble angle);
 
-	extern XklEngine *matekbd_status_get_xkl_engine (void);
+extern XklEngine *matekbd_status_get_xkl_engine(void);
 
-	extern gchar **matekbd_status_get_group_names (void);
+extern gchar **matekbd_status_get_group_names(void);
 
-	extern gchar *matekbd_status_get_image_filename (guint group);
+extern gchar *matekbd_status_get_image_filename(guint group);
 
-	extern void
-	 matekbd_status_set_tooltips_format (const gchar str[]);
+extern void matekbd_status_set_tooltips_format(const gchar str[]);
 
 #ifdef __cplusplus
 }

@@ -21,58 +21,61 @@
 #define __MATEKBD_INDICATOR_H__
 
 #include <gtk/gtk.h>
-
 #include <libxklavier/xklavier.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-	typedef struct _MatekbdIndicator MatekbdIndicator;
-	typedef struct _MatekbdIndicatorPrivate MatekbdIndicatorPrivate;
-	typedef struct _MatekbdIndicatorClass MatekbdIndicatorClass;
+typedef struct _MatekbdIndicator MatekbdIndicator;
+typedef struct _MatekbdIndicatorPrivate MatekbdIndicatorPrivate;
+typedef struct _MatekbdIndicatorClass MatekbdIndicatorClass;
 
-#define MATEKBD_TYPE_INDICATOR             (matekbd_indicator_get_type ())
-#define MATEKBD_INDICATOR(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), MATEKBD_TYPE_INDICATOR, MatekbdIndicator))
-#define MATEKBD_INDICATOR_CLASS(obj)       (G_TYPE_CHECK_CLASS_CAST ((obj), MATEKBD_TYPE_INDICATOR,  MatekbdIndicatorClass))
-#define MATEKBD_IS_INDICATOR(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), MATEKBD_TYPE_INDICATOR))
-#define MATEKBD_IS_INDICATOR_CLASS(obj)    (G_TYPE_CHECK_CLASS_TYPE ((obj), MATEKBD_TYPE_INDICATOR))
-#define MATEKBD_INDICATOR_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), MATEKBD_TYPE_INDICATOR, MatekbdIndicatorClass))
+#define MATEKBD_TYPE_INDICATOR (matekbd_indicator_get_type())
+#define MATEKBD_INDICATOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), MATEKBD_TYPE_INDICATOR, MatekbdIndicator))
+#define MATEKBD_INDICATOR_CLASS(obj)                      \
+  (G_TYPE_CHECK_CLASS_CAST((obj), MATEKBD_TYPE_INDICATOR, \
+                           MatekbdIndicatorClass))
+#define MATEKBD_IS_INDICATOR(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE((obj), MATEKBD_TYPE_INDICATOR))
+#define MATEKBD_IS_INDICATOR_CLASS(obj) \
+  (G_TYPE_CHECK_CLASS_TYPE((obj), MATEKBD_TYPE_INDICATOR))
+#define MATEKBD_INDICATOR_GET_CLASS(obj)                    \
+  (G_TYPE_INSTANCE_GET_CLASS((obj), MATEKBD_TYPE_INDICATOR, \
+                             MatekbdIndicatorClass))
 
-	struct _MatekbdIndicator {
-		GtkNotebook parent;
-		MatekbdIndicatorPrivate *priv;
-	};
+struct _MatekbdIndicator {
+  GtkNotebook parent;
+  MatekbdIndicatorPrivate *priv;
+};
 
-	struct _MatekbdIndicatorClass {
-		GtkNotebookClass parent_class;
+struct _MatekbdIndicatorClass {
+  GtkNotebookClass parent_class;
 
-		void (*reinit_ui) (MatekbdIndicator * gki);
-	};
+  void (*reinit_ui)(MatekbdIndicator *gki);
+};
 
-	extern GType matekbd_indicator_get_type (void);
+extern GType matekbd_indicator_get_type(void);
 
-	extern GtkWidget *matekbd_indicator_new (void);
+extern GtkWidget *matekbd_indicator_new(void);
 
-	extern void matekbd_indicator_reinit_ui (MatekbdIndicator * gki);
+extern void matekbd_indicator_reinit_ui(MatekbdIndicator *gki);
 
-	extern void matekbd_indicator_set_angle (MatekbdIndicator * gki,
-					      gdouble angle);
+extern void matekbd_indicator_set_angle(MatekbdIndicator *gki, gdouble angle);
 
-	extern XklEngine *matekbd_indicator_get_xkl_engine (void);
+extern XklEngine *matekbd_indicator_get_xkl_engine(void);
 
-	extern gchar **matekbd_indicator_get_group_names (void);
+extern gchar **matekbd_indicator_get_group_names(void);
 
-	extern gchar *matekbd_indicator_get_image_filename (guint group);
+extern gchar *matekbd_indicator_get_image_filename(guint group);
 
-	extern gdouble matekbd_indicator_get_max_width_height_ratio (void);
+extern gdouble matekbd_indicator_get_max_width_height_ratio(void);
 
-	extern void
-	 matekbd_indicator_set_parent_tooltips (MatekbdIndicator *
-					     gki, gboolean ifset);
+extern void matekbd_indicator_set_parent_tooltips(MatekbdIndicator *gki,
+                                                  gboolean ifset);
 
-	extern void
-	 matekbd_indicator_set_tooltips_format (const gchar str[]);
+extern void matekbd_indicator_set_tooltips_format(const gchar str[]);
 
 #ifdef __cplusplus
 }

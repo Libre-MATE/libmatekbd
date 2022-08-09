@@ -17,44 +17,39 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include "config.h"
-
-#include "libxklavier/xklavier.h"
 #include "libmatekbd/matekbd-status.h"
 
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
-
 #include <gdk/gdk.h>
 #include <gdk/gdkx.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "X11/XKBlib.h"
+#include "config.h"
+#include "libxklavier/xklavier.h"
 
-int
-main (int argc, char **argv)
-{
-	GtkStatusIcon *icon;
+int main(int argc, char **argv) {
+  GtkStatusIcon *icon;
 
-	bindtextdomain (GETTEXT_PACKAGE, MATELOCALEDIR);
-	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
-	textdomain (GETTEXT_PACKAGE);
+  bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
+  bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
+  textdomain(GETTEXT_PACKAGE);
 
-	gtk_init (&argc, &argv);
+  gtk_init(&argc, &argv);
 
-	icon = matekbd_status_new ();
+  icon = matekbd_status_new();
 
-        if (icon == NULL)
-	{
-		return 1;
-	}
+  if (icon == NULL) {
+    return 1;
+  }
 
-	gtk_main ();
+  gtk_main();
 
-	return 0;
+  return 0;
 }

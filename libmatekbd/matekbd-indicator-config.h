@@ -29,19 +29,19 @@
  */
 typedef struct _MatekbdIndicatorConfig MatekbdIndicatorConfig;
 struct _MatekbdIndicatorConfig {
-	guint secondary_groups_mask;
-	gboolean show_flags;
+  guint secondary_groups_mask;
+  gboolean show_flags;
 
-	gchar *font_family;
-	gchar *foreground_color;
-	gchar *background_color;
+  gchar *font_family;
+  gchar *foreground_color;
+  gchar *background_color;
 
-	/* private, transient */
-	GSettings *settings;
-	GSList *image_filenames;
-	GtkIconTheme *icon_theme;
-	gulong config_listener_id;
-	XklEngine *engine;
+  /* private, transient */
+  GSettings *settings;
+  GSList *image_filenames;
+  GtkIconTheme *icon_theme;
+  gulong config_listener_id;
+  XklEngine *engine;
 };
 
 /*
@@ -49,42 +49,36 @@ struct _MatekbdIndicatorConfig {
  * some of them require MatekbdKeyboardConfig as well -
  * for loading approptiate images
  */
-extern void matekbd_indicator_config_init (MatekbdIndicatorConfig *
-					applet_config,
-					XklEngine * engine);
-extern void matekbd_indicator_config_term (MatekbdIndicatorConfig *
-					applet_config);
+extern void matekbd_indicator_config_init(MatekbdIndicatorConfig *applet_config,
+                                          XklEngine *engine);
+extern void matekbd_indicator_config_term(
+    MatekbdIndicatorConfig *applet_config);
 
-extern void matekbd_indicator_config_load_from_gsettings (MatekbdIndicatorConfig
-						   * applet_config);
-extern void matekbd_indicator_config_save_to_gsettings (MatekbdIndicatorConfig *
-						 applet_config);
+extern void matekbd_indicator_config_load_from_gsettings(
+    MatekbdIndicatorConfig *applet_config);
+extern void matekbd_indicator_config_save_to_gsettings(
+    MatekbdIndicatorConfig *applet_config);
 
-extern void matekbd_indicator_config_refresh_style (MatekbdIndicatorConfig *
-						 applet_config);
+extern void matekbd_indicator_config_refresh_style(
+    MatekbdIndicatorConfig *applet_config);
 
-extern gchar
-    * matekbd_indicator_config_get_images_file (MatekbdIndicatorConfig * applet_config,
-                                                MatekbdKeyboardConfig * kbd_config,
-                                                guint group);
+extern gchar *matekbd_indicator_config_get_images_file(
+    MatekbdIndicatorConfig *applet_config, MatekbdKeyboardConfig *kbd_config,
+    guint group);
 
-extern void matekbd_indicator_config_load_image_filenames (MatekbdIndicatorConfig
-							* applet_config,
-							MatekbdKeyboardConfig
-							* kbd_config);
-extern void matekbd_indicator_config_free_image_filenames (MatekbdIndicatorConfig
-							* applet_config);
+extern void matekbd_indicator_config_load_image_filenames(
+    MatekbdIndicatorConfig *applet_config, MatekbdKeyboardConfig *kbd_config);
+extern void matekbd_indicator_config_free_image_filenames(
+    MatekbdIndicatorConfig *applet_config);
 
 /* Should be updated on Indicator/GSettings configuration change */
-extern void matekbd_indicator_config_activate (MatekbdIndicatorConfig *
-					    applet_config);
+extern void matekbd_indicator_config_activate(
+    MatekbdIndicatorConfig *applet_config);
 
-extern void matekbd_indicator_config_start_listen (MatekbdIndicatorConfig *
-						applet_config,
-						GCallback
-						func, gpointer user_data);
+extern void matekbd_indicator_config_start_listen(
+    MatekbdIndicatorConfig *applet_config, GCallback func, gpointer user_data);
 
-extern void matekbd_indicator_config_stop_listen (MatekbdIndicatorConfig *
-					       applet_config);
+extern void matekbd_indicator_config_stop_listen(
+    MatekbdIndicatorConfig *applet_config);
 
 #endif
