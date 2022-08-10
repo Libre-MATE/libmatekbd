@@ -20,12 +20,11 @@
 #ifndef __MATEKBD_INDICATOR_H__
 #define __MATEKBD_INDICATOR_H__
 
+#include <glib.h>
 #include <gtk/gtk.h>
 #include <libxklavier/xklavier.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+G_BEGIN_DECLS
 
 typedef struct _MatekbdIndicator MatekbdIndicator;
 typedef struct _MatekbdIndicatorPrivate MatekbdIndicatorPrivate;
@@ -77,7 +76,6 @@ extern void matekbd_indicator_set_parent_tooltips(MatekbdIndicator *gki,
 
 extern void matekbd_indicator_set_tooltips_format(const gchar str[]);
 
-#ifdef __cplusplus
-}
-#endif
-#endif
+G_END_DECLS
+
+#endif /* __MATEKBD_INDICATOR_H__ */

@@ -20,12 +20,11 @@
 #ifndef __MATEKBD_STATUS_H__
 #define __MATEKBD_STATUS_H__
 
+#include <glib.h>
 #include <gtk/gtk.h>
 #include <libxklavier/xklavier.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+G_BEGIN_DECLS
 
 typedef struct _MatekbdStatus MatekbdStatus;
 typedef struct _MatekbdStatusPrivate MatekbdStatusPrivate;
@@ -68,7 +67,6 @@ extern gchar *matekbd_status_get_image_filename(guint group);
 
 extern void matekbd_status_set_tooltips_format(const gchar str[]);
 
-#ifdef __cplusplus
-}
-#endif
-#endif
+G_END_DECLS
+
+#endif /* __MATEKBD_STATUS_H__ */

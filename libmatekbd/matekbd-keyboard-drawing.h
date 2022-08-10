@@ -22,11 +22,11 @@
 
 #include <X11/XKBlib.h>
 #include <X11/extensions/XKBgeom.h>
+#include <glib.h>
 #include <gtk/gtk.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+G_BEGIN_DECLS
+
 #define MATEKBD_KEYBOARD_DRAWING(obj)                                     \
   (G_TYPE_CHECK_INSTANCE_CAST((obj), matekbd_keyboard_drawing_get_type(), \
                               MatekbdKeyboardDrawing))
@@ -206,7 +206,6 @@ void matekbd_keyboard_drawing_print(MatekbdKeyboardDrawing *drawing,
 
 GtkWidget *matekbd_keyboard_drawing_new_dialog(gint group, gchar *group_name);
 
-#ifdef __cplusplus
-}
-#endif
+G_END_DECLS
+
 #endif /* #ifndef MATEKBD_KEYBOARD_DRAWING_H */
