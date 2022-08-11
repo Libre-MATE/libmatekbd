@@ -1125,18 +1125,6 @@ static void draw_key(MatekbdKeyboardDrawingRenderContext *context,
   outline = shape->primary ? shape->primary : shape->outlines;
   draw_outline(context, outline, &color, key->angle, key->origin_x,
                key->origin_y);
-#if 0
-	/* don't draw other outlines for now, since
-	 * the text placement does not take them into account
-	 */
-	for (i = 0; i < shape->num_outlines; i++) {
-		if (shape->outlines + i == shape->approx ||
-		    shape->outlines + i == shape->primary)
-			continue;
-		draw_outline (context, shape->outlines + i, NULL,
-			      key->angle, key->origin_x, key->origin_y);
-	}
-#endif
 
   origin_offset_x = calc_origin_offset_x(outline);
   draw_key_label(context, drawing, key->keycode, key->angle,

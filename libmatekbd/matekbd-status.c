@@ -281,11 +281,6 @@ static GdkPixbuf *matekbd_status_prepare_drawing(MatekbdStatus *gki,
     guchar *pixbuf_data;
     matekbd_status_render_cairo(cairo_create(cs), group);
     cairo_data = cairo_image_surface_get_data(cs);
-#if 0
-		char pngfilename[20];
-		g_sprintf (pngfilename, "label%u.png", group);
-		cairo_surface_write_to_png (cs, pngfilename);
-#endif
     pixbuf_data = g_new0(
         guchar, (gsize)(4 * globals.real_width * globals.current_height));
     convert_bgra_to_rgba(cairo_data, pixbuf_data, globals.current_width,
