@@ -1959,9 +1959,9 @@ static void matekbd_keyboard_drawing_init(MatekbdKeyboardDrawing *drawing) {
                             GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK |
                             GDK_FOCUS_CHANGE_MASK);
   g_signal_connect(drawing, "draw", G_CALLBACK(draw), drawing);
-  g_signal_connect_after(G_OBJECT(drawing), "key-press-event",
+  g_signal_connect_after(drawing, "key-press-event",
                          G_CALLBACK(key_event), drawing);
-  g_signal_connect_after(G_OBJECT(drawing), "key-release-event",
+  g_signal_connect_after(drawing, "key-release-event",
                          G_CALLBACK(key_event), drawing);
   g_signal_connect(drawing, "button-press-event",
                    G_CALLBACK(button_press_event), drawing);
