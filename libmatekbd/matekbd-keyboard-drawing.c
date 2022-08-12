@@ -1958,21 +1958,21 @@ static void matekbd_keyboard_drawing_init(MatekbdKeyboardDrawing *drawing) {
                         GDK_EXPOSURE_MASK | GDK_KEY_PRESS_MASK |
                             GDK_KEY_RELEASE_MASK | GDK_BUTTON_PRESS_MASK |
                             GDK_FOCUS_CHANGE_MASK);
-  g_signal_connect(G_OBJECT(drawing), "draw", G_CALLBACK(draw), drawing);
+  g_signal_connect(drawing, "draw", G_CALLBACK(draw), drawing);
   g_signal_connect_after(G_OBJECT(drawing), "key-press-event",
                          G_CALLBACK(key_event), drawing);
   g_signal_connect_after(G_OBJECT(drawing), "key-release-event",
                          G_CALLBACK(key_event), drawing);
-  g_signal_connect(G_OBJECT(drawing), "button-press-event",
+  g_signal_connect(drawing, "button-press-event",
                    G_CALLBACK(button_press_event), drawing);
-  g_signal_connect(G_OBJECT(drawing), "focus-out-event",
+  g_signal_connect(drawing, "focus-out-event",
                    G_CALLBACK(focus_event), drawing);
-  g_signal_connect(G_OBJECT(drawing), "focus-in-event", G_CALLBACK(focus_event),
+  g_signal_connect(drawing, "focus-in-event", G_CALLBACK(focus_event),
                    drawing);
-  g_signal_connect(G_OBJECT(drawing), "size-allocate",
+  g_signal_connect(drawing, "size-allocate",
                    G_CALLBACK(size_allocate), drawing);
-  g_signal_connect(G_OBJECT(drawing), "destroy", G_CALLBACK(destroy), drawing);
-  g_signal_connect(G_OBJECT(drawing), "style-set", G_CALLBACK(style_changed),
+  g_signal_connect(drawing, "destroy", G_CALLBACK(destroy), drawing);
+  g_signal_connect(drawing, "style-set", G_CALLBACK(style_changed),
                    drawing);
 
   gdk_window_add_filter(NULL, (GdkFilterFunc)xkb_state_notify_event_filter,
@@ -2395,7 +2395,7 @@ GtkWidget *matekbd_keyboard_drawing_new_dialog(gint group, gchar *group_name) {
   g_object_unref(G_OBJECT(xkl_data));
 
   g_object_set_data(G_OBJECT(dialog), "builderData", builder);
-  g_signal_connect(G_OBJECT(dialog), "response",
+  g_signal_connect(dialog, "response",
                    G_CALLBACK(show_layout_response), NULL);
 
   rect = matekbd_preview_load_position();

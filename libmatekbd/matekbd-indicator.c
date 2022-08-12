@@ -99,7 +99,7 @@ void matekbd_indicator_load_images() {
             NULL, GTK_DIALOG_DESTROY_WITH_PARENT, GTK_MESSAGE_ERROR,
             GTK_BUTTONS_OK, _("There was an error loading an image: %s"),
             gerror->message);
-        g_signal_connect(G_OBJECT(dialog), "response",
+        g_signal_connect(dialog, "response",
                          G_CALLBACK(gtk_widget_destroy), NULL);
 
         gtk_window_set_resizable(GTK_WINDOW(dialog), FALSE);
@@ -317,7 +317,7 @@ static GtkWidget *matekbd_indicator_prepare_drawing(MatekbdIndicator *gki,
     image = GDK_PIXBUF(pimage);
     flag = gtk_drawing_area_new();
     gtk_widget_add_events(GTK_WIDGET(flag), GDK_BUTTON_PRESS_MASK);
-    g_signal_connect(G_OBJECT(flag), "draw", G_CALLBACK(draw_flag), image);
+    g_signal_connect(flag, "draw", G_CALLBACK(draw_flag), image);
     gtk_container_add(GTK_CONTAINER(ebox), flag);
   } else {
     char *lbl_title = NULL;
@@ -350,10 +350,10 @@ static GtkWidget *matekbd_indicator_prepare_drawing(MatekbdIndicator *gki,
     gtk_container_add(GTK_CONTAINER(ebox), label);
   }
 
-  g_signal_connect(G_OBJECT(ebox), "button_press_event",
+  g_signal_connect(ebox, "button_press_event",
                    G_CALLBACK(matekbd_indicator_button_pressed), gki);
 
-  g_signal_connect(G_OBJECT(gki), "key_press_event",
+  g_signal_connect(gki, "key_press_event",
                    G_CALLBACK(matekbd_indicator_key_pressed), gki);
 
   /* We have everything prepared for that size */

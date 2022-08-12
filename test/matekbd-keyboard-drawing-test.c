@@ -181,8 +181,7 @@ gint main(gint argc, gchar **argv) {
   }
 
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit),
-                   NULL);
+  g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
   screen = gtk_window_get_screen(GTK_WINDOW(window));
   monitor =
@@ -206,7 +205,7 @@ gint main(gint argc, gchar **argv) {
   if (track_config)
     matekbd_keyboard_drawing_set_track_config(
         MATEKBD_KEYBOARD_DRAWING(matekbd_keyboard_drawing), TRUE);
-  g_signal_connect(G_OBJECT(matekbd_keyboard_drawing), "bad-keycode",
+  g_signal_connect(matekbd_keyboard_drawing, "bad-keycode",
                    G_CALLBACK(bad_keycode), NULL);
 
   if (symbols || geometry || keycodes) {

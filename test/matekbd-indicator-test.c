@@ -62,8 +62,7 @@ int main(int argc, char** argv) {
 
   gtk_widget_show_all(mainwin);
 
-  g_signal_connect(G_OBJECT(mainwin), "destroy", G_CALLBACK(gtk_main_quit),
-                   NULL);
+  g_signal_connect(mainwin, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
   gtk_main();
 
