@@ -6,7 +6,9 @@ m4_define([libmatekbd_minor_version], [26])
 m4_define([libmatekbd_micro_version], [0])
 m4_define([libmatekbd_version],[libmatekbd_major_version.libmatekbd_minor_version.libmatekbd_micro_version])
 
-AC_INIT([libmatekbd], [libmatekbd_version], [https://github.com/mate-desktop/libmatekbd])
+AC_INIT([libmatekbd],
+        [libmatekbd_version],
+        [https://github.com/Libre-MATE/libmatekbd])
 AC_PREREQ(2.60)
 
 VERSION_INFO=6:0:2
