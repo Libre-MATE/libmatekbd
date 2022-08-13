@@ -10,6 +10,7 @@ AC_INIT([libmatekbd],
         [libmatekbd_version],
         [https://github.com/Libre-MATE/libmatekbd])
 AC_PREREQ(2.60)
+AC_COPYRIGHT([Copyright (C) 2022 Libre MATE])
 
 VERSION_INFO=6:0:2
 AC_SUBST(VERSION_INFO)
