@@ -29,8 +29,7 @@ VERSION_INFO=6:0:2
 AC_SUBST(VERSION_INFO)
 
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE([1.9 no-dist-gzip dist-xz check-news])
-m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
+AM_INIT_AUTOMAKE([1.11 no-dist-gzip dist-xz silent-rules check-news])
 AC_CONFIG_MACRO_DIR(m4)
 
 GLIB_REQUIRED=2.62.0
