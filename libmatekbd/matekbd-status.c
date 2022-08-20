@@ -242,13 +242,12 @@ static void convert_bgra_to_rgba(guint8 const *src, guint8 *dst, int width,
 static GdkPixbuf *matekbd_status_prepare_drawing(MatekbdStatus *gki,
                                                  guint group) {
   GError *gerror = NULL;
-  char *image_filename;
   GdkPixbuf *image;
 
   if (globals.current_width == 0) return NULL;
 
   if (globals.ind_cfg.show_flags) {
-    image_filename =
+    char *image_filename =
         (char *)g_slist_nth_data(globals.ind_cfg.image_filenames, group);
 
     image = gdk_pixbuf_new_from_file_at_size(

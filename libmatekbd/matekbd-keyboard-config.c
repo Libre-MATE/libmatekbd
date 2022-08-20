@@ -151,17 +151,19 @@ gboolean matekbd_keyboard_config_split_items(const gchar *merged,
  */
 static void matekbd_keyboard_config_copy_from_xkl_config(
     MatekbdKeyboardConfig *kbd_config, XklConfigRec *pdata) {
-  char **p, **p1;
+  char **p;
   int i;
+
   matekbd_keyboard_config_model_set(kbd_config, pdata->model);
   xkl_debug(150, "Loaded Kbd model: [%s]\n", pdata->model);
 
   /* Layouts */
   g_strfreev(kbd_config->layouts_variants);
   kbd_config->layouts_variants = NULL;
+
   if (pdata->layouts != NULL) {
+    char **p1 = pdata->variants;
     p = pdata->layouts;
-    p1 = pdata->variants;
     kbd_config->layouts_variants =
         g_new0(gchar *, g_strv_length(pdata->layouts) + 1);
     i = 0;
@@ -183,12 +185,13 @@ static void matekbd_keyboard_config_copy_from_xkl_config(
     kbd_config->options = g_new0(gchar *, g_strv_length(pdata->options) + 1);
     i = 0;
     while (*p != NULL) {
-      char group[XKL_MAX_CI_NAME_LENGTH];
       char *option = *p;
       char *delim = (option != NULL) ? strchr(option, ':') : NULL;
       size_t len;
       if ((delim != NULL) &&
           ((len = (size_t)(delim - option)) < XKL_MAX_CI_NAME_LENGTH)) {
+        char group[XKL_MAX_CI_NAME_LENGTH];
+
         strncpy(group, option, len);
         group[len] = 0;
         xkl_debug(150, "Loaded Kbd option: [%s][%s]\n", group, option);

@@ -116,17 +116,14 @@ void matekbd_indicator_load_images() {
 }
 
 static void matekbd_indicator_free_images() {
-  GdkPixbuf *pi;
   GSList *img_node;
 
   matekbd_indicator_config_free_image_filenames(&globals.ind_cfg);
 
   while ((img_node = globals.images) != NULL) {
-    pi = GDK_PIXBUF(img_node->data);
+    GdkPixbuf *pi = GDK_PIXBUF(img_node->data);
     /* It can be NULL - some images may be missing */
-    if (pi != NULL) {
-      g_object_unref(pi);
-    }
+    if (pi != NULL) g_object_unref(pi);
     globals.images = g_slist_remove_link(globals.images, img_node);
     g_slist_free_1(img_node);
   }
@@ -305,7 +302,6 @@ gchar *matekbd_indicator_create_label_title(guint group,
 static GtkWidget *matekbd_indicator_prepare_drawing(MatekbdIndicator *gki,
                                                     guint group) {
   gpointer pimage;
-  GdkPixbuf *image;
   GtkWidget *ebox;
 
   pimage = g_slist_nth_data(globals.images, group);
@@ -314,7 +310,7 @@ static GtkWidget *matekbd_indicator_prepare_drawing(MatekbdIndicator *gki,
   if (globals.ind_cfg.show_flags) {
     GtkWidget *flag;
     if (pimage == NULL) return NULL;
-    image = GDK_PIXBUF(pimage);
+    GdkPixbuf *image = GDK_PIXBUF(pimage);
     flag = gtk_drawing_area_new();
     gtk_widget_add_events(GTK_WIDGET(flag), GDK_BUTTON_PRESS_MASK);
     g_signal_connect(flag, "draw", G_CALLBACK(draw_flag), image);
