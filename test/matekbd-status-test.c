@@ -17,6 +17,10 @@
  * Boston, MA 02110-1301, USA.
  */
 
+#ifdef HAVE_CONFIG_H
+#include <config.h>
+#endif /* HAVE_CONFIG_H */
+
 #include "libmatekbd/matekbd-status.h"
 
 #include <fcntl.h>
@@ -31,7 +35,6 @@
 #include <unistd.h>
 
 #include "X11/XKBlib.h"
-#include "config.h"
 #include "libxklavier/xklavier.h"
 
 int main(int argc, char **argv) {

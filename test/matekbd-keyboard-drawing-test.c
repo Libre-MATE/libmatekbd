@@ -17,9 +17,9 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#if HAVE_CONFIG_H
+#ifdef HAVE_CONFIG_H
 #include <config.h>
-#endif
+#endif /* HAVE_CONFIG_H */
 
 #include <glib.h>
 #include <gtk/gtk.h>

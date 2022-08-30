@@ -17,8 +17,11 @@
  * Boston, MA 02110-1301, USA.
  */
 
-#include <X11/keysym.h>
+#ifdef HAVE_CONFIG_H
 #include <config.h>
+#endif /* HAVE_CONFIG_H */
+
+#include <X11/keysym.h>
 #include <glib/gi18n-lib.h>
 #include <matekbd-config-private.h>
 #include <matekbd-keyboard-config.h>
