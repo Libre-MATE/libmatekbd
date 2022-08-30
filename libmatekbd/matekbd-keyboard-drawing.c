@@ -1067,10 +1067,12 @@ static void draw_key_label(MatekbdKeyboardDrawingRenderContext *context,
  * vertical lines in the outline
  */
 static gint calc_origin_offset_x(XkbOutlineRec *outline) {
+  XkbPointPtr point = outline->points;
   gint rv = 0;
   gint i;
-  XkbPointPtr point = outline->points;
-  if (outline->num_points < 3) return 0;
+
+  if (outline->num_points < 3) return rv;
+
   for (i = outline->num_points; --i > 0;) {
     gint x1 = point->x;
     gint y1 = point++->y;

@@ -48,11 +48,10 @@ int main(int argc, char **argv) {
 
   icon = matekbd_status_new();
 
-  if (icon == NULL) {
-    return 1;
-  }
+  if (icon == NULL)
+    return EXIT_FAILURE;
 
   gtk_main();
 
-  return 0;
+  return EXIT_SUCCESS;
 }

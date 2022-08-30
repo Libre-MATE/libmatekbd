@@ -165,19 +165,19 @@ gint main(gint argc, gchar **argv) {
 
   if (program_version) {
     g_print("kbdraw %s\n", VERSION);
-    exit(0);
+    exit(EXIT_SUCCESS);
   }
 
   gtk_init(&argc, &argv);
 
   if (!set_groups(groups, groupLevels)) {
     g_printerr("--groups: invalid argument\n");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   if (!set_levels(levels, groupLevels)) {
     g_printerr("--levels: invalid argument\n");
-    exit(1);
+    exit(EXIT_FAILURE);
   }
 
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -244,7 +244,7 @@ gint main(gint argc, gchar **argv) {
           "  geometry:  %s\n\n",
           names.keycodes, names.types, names.compat, names.symbols,
           names.geometry);
-      exit(1);
+      exit(EXIT_FAILURE);
     }
   }
 
@@ -252,5 +252,5 @@ gint main(gint argc, gchar **argv) {
 
   gtk_main();
 
-  return 0;
+  return EXIT_SUCCESS;
 }

@@ -727,7 +727,7 @@ gchar *matekbd_indicator_get_image_filename(guint group) {
 gdouble matekbd_indicator_get_max_width_height_ratio(void) {
   gdouble rv = 0.0;
   GSList *ip = globals.images;
-  if (!globals.ind_cfg.show_flags) return 0;
+  if (!globals.ind_cfg.show_flags) return rv;
   while (ip != NULL) {
     GdkPixbuf *img = GDK_PIXBUF(ip->data);
     int width = gdk_pixbuf_get_width(img);
