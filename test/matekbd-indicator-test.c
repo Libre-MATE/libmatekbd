@@ -34,6 +34,10 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#ifdef ENABLE_NLS
+#include <locale.h>
+#endif
+
 #include "X11/XKBlib.h"
 #include "libxklavier/xklavier.h"
 
@@ -42,9 +46,12 @@ int main(int argc, char** argv) {
   GtkWidget* mainwin;
   GtkWidget* vbox;
 
+#ifdef ENABLE_NLS
+  setlocale(LC_ALL, "");
   bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
   textdomain(GETTEXT_PACKAGE);
+#endif /* ENABLE_NLS */
 
   /* Different data dir defs in g-a and g-c-c */
   gtk_init(&argc, &argv);

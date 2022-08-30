@@ -2,14 +2,17 @@ if BUILD_TESTS
 TEST = test
 endif
 
-SUBDIRS = po libmatekbd $(TEST)
+if USE_NLS
+PO_SUBDIR = po
+endif
+
+SUBDIRS = $(PO_SUBDIR) libmatekbd $(TEST)
 
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-introspection \
 	--enable-compile-warnings=no
-
 
 EXTRA_DIST = \
         autogen.sh \

@@ -60,6 +60,8 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Gettext package])
 AM_GNU_GETTEXT_VERSION([0.19.8])
 AM_GNU_GETTEXT([external])
 
+AM_CONDITIONAL([USE_NLS], [test "x${USE_NLS}" = "xyes"])
+
 # **********************
 # GLIB_COMPILE_RESOURCES
 # **********************
@@ -161,4 +163,5 @@ Configure summary:
     compiler:                     ${CC}
     cflags:                       ${CFLAGS}
     Warning flags:                ${WARN_CFLAGS}
+    Native Language support:      ${USE_NLS}
 "

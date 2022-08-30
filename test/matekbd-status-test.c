@@ -34,22 +34,28 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#ifdef ENABLE_NLS
+#include <locale.h>
+#endif
+
 #include "X11/XKBlib.h"
 #include "libxklavier/xklavier.h"
 
 int main(int argc, char **argv) {
   GtkStatusIcon *icon;
 
+#ifdef ENABLE_NLS
+  setlocale(LC_ALL, "");
   bindtextdomain(GETTEXT_PACKAGE, MATELOCALEDIR);
   bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
   textdomain(GETTEXT_PACKAGE);
+#endif /* ENABLE_NLS */
 
   gtk_init(&argc, &argv);
 
   icon = matekbd_status_new();
-
   if (icon == NULL)
-    return EXIT_FAILURE;
+    exit(EXIT_FAILURE);
 
   gtk_main();
 
