@@ -223,7 +223,7 @@ static void matekbd_keyboard_config_copy_to_xkl_config(
                                               &variant) &&
           variant != NULL) {
         *p1 = (layout == NULL) ? g_strdup("") : g_strdup(layout);
-        *p2 = (variant == NULL) ? g_strdup("") : g_strdup(variant);
+        *p2 = g_strdup(variant);
       } else {
         *p1 = (*the_layout_variant == NULL) ? g_strdup("")
                                             : g_strdup(*the_layout_variant);
