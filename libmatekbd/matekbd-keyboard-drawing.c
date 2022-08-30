@@ -1281,7 +1281,7 @@ typedef struct {
 
 static void redraw_overlapping_doodads(
     MatekbdKeyboardDrawingRenderContext *context,
-    MatekbdKeyboardDrawing *drawing, MatekbdKeyboardDrawingKey *key) {
+    MatekbdKeyboardDrawing *drawing, const MatekbdKeyboardDrawingKey *key) {
   GList *list;
   gboolean do_draw = FALSE;
 
