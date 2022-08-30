@@ -140,7 +140,7 @@ static void rounded_corner(cairo_t *cr, gdouble bx, gdouble by, gdouble cx,
 
   cairo_get_current_point(cr, &ax, &ay);
 #ifdef KBDRAW_DEBUG
-  printf("        current point: (%f, %f), radius %f:\n", ax, ay, radius);
+  g_debug("        current point: (%f, %f), radius %f:\n", ax, ay, radius);
 #endif
 
   /* make sure radius is not too large */
@@ -204,7 +204,7 @@ static void rounded_corner(cairo_t *cr, gdouble bx, gdouble by, gdouble cx,
   while (d > 2 * M_PI) d -= 2 * M_PI;
 
 #ifdef KBDRAW_DEBUG
-  printf("        line 1 to: (%f, %f):\n", a1x, a1y);
+  g_debug("        line 1 to: (%f, %f):\n", a1x, a1y);
 #endif
   if (!(isnan(a1x) || isnan(a1y))) cairo_line_to(cr, a1x, a1y);
 
@@ -215,7 +215,7 @@ static void rounded_corner(cairo_t *cr, gdouble bx, gdouble by, gdouble cx,
     cairo_arc_negative(cr, ix, iy, radius, phi1, phi2);
 
 #ifdef KBDRAW_DEBUG
-  printf("        line 2 to: (%f, %f):\n", cx, cy);
+  g_debug("        line 2 to: (%f, %f):\n", cx, cy);
 #endif
   cairo_line_to(cr, cx, cy);
 }
@@ -228,7 +228,7 @@ static void rounded_polygon(cairo_t *cr, gboolean filled, gdouble radius,
                 (gdouble)(points[num_points - 1].y + points[0].y) / 2);
 
 #ifdef KBDRAW_DEBUG
-  printf("    rounded polygon of radius %f:\n", radius);
+  g_debug("    rounded polygon of radius %f:\n", radius);
 #endif
   for (i = 0; i < num_points; i++) {
     j = (i + 1) % num_points;
@@ -236,7 +236,7 @@ static void rounded_polygon(cairo_t *cr, gboolean filled, gdouble radius,
                    (gdouble)(points[i].x + points[j].x) / 2,
                    (gdouble)(points[i].y + points[j].y) / 2, radius);
 #ifdef KBDRAW_DEBUG
-    printf("      corner (%d, %d) -> (%d, %d):\n", points[i].x, points[i].y,
+    g_debug("      corner (%d, %d) -> (%d, %d):\n", points[i].x, points[i].y,
            points[j].x, points[j].y);
 #endif
   };
@@ -268,13 +268,13 @@ static void draw_polygon(MatekbdKeyboardDrawingRenderContext *context,
   points = g_new(GdkPoint, num_points);
 
 #ifdef KBDRAW_DEBUG
-  printf("    Polygon points:\n");
+  g_debug("    Polygon points:\n");
 #endif
   for (i = 0; i < num_points; i++) {
     points[i].x = xkb_to_pixmap_coord(context, xkb_x + xkb_points[i].x);
     points[i].y = xkb_to_pixmap_coord(context, xkb_y + xkb_points[i].y);
 #ifdef KBDRAW_DEBUG
-    printf("      %d, %d\n", points[i].x, points[i].y);
+    g_debug("      %d, %d\n", points[i].x, points[i].y);
 #endif
   }
 
@@ -369,7 +369,7 @@ static void draw_outline(MatekbdKeyboardDrawingRenderContext *context,
                          XkbOutlineRec *outline, GdkRGBA *color, gint angle,
                          gint origin_x, gint origin_y) {
 #ifdef KBDRAW_DEBUG
-  printf(" num_points in %p: %d\n", outline, outline->num_points);
+  g_debug(" num_points in %p: %d\n", outline, outline->num_points);
 #endif
 
   if (outline->num_points == 1) {
@@ -379,7 +379,7 @@ static void draw_outline(MatekbdKeyboardDrawingRenderContext *context,
                      (gdouble)outline->corner_radius);
 
 #ifdef KBDRAW_DEBUG
-    printf("pointsxy:%d %d %d\n", outline->points[0].x, outline->points[0].y,
+    g_debug("pointsxy:%d %d %d\n", outline->points[0].x, outline->points[0].y,
            outline->corner_radius);
 #endif
 
@@ -479,7 +479,7 @@ static guint find_keycode(MatekbdKeyboardDrawing *drawing, gchar *key_name) {
   if (!drawing->xkb) return INVALID_KEYCODE;
 
 #ifdef KBDRAW_DEBUG
-  printf("    looking for keycode for (%c%c%c%c)\n", key_name[0], key_name[1],
+  g_debug("    looking for keycode for (%c%c%c%c)\n", key_name[0], key_name[1],
          key_name[2], key_name[3]);
 #endif
 
@@ -498,7 +498,7 @@ static guint find_keycode(MatekbdKeyboardDrawing *drawing, gchar *key_name) {
     }
     if (is_name_matched) {
 #ifdef KBDRAW_DEBUG
-      printf("      found keycode %u\n", keycode);
+      g_debug("      found keycode %u\n", keycode);
 #endif
       return keycode;
     }
@@ -521,7 +521,7 @@ static guint find_keycode(MatekbdKeyboardDrawing *drawing, gchar *key_name) {
     if (is_name_matched) {
       keycode = find_keycode(drawing, palias->real);
 #ifdef KBDRAW_DEBUG
-      printf("found alias keycode %u\n", keycode);
+      g_debug("found alias keycode %u\n", keycode);
 #endif
       return keycode;
     }
@@ -961,7 +961,7 @@ static void draw_key_label_helper(MatekbdKeyboardDrawingRenderContext *context,
 
   if (keysym == 0) return;
 #ifdef KBDRAW_DEBUG
-  printf("keysym: %04X(%c) at glp: %d\n", (unsigned)keysym, (char)keysym,
+  g_debug("keysym: %04X(%c) at glp: %d\n", (unsigned)keysym, (char)keysym,
          (int)glp);
 #endif
 
@@ -1096,7 +1096,7 @@ static void draw_key(MatekbdKeyboardDrawingRenderContext *context,
   if (!drawing->xkb) return;
 
 #ifdef KBDRAW_DEBUG
-  printf("shape: %p (base %p, index %d)\n",
+  g_debug("shape: %p (base %p, index %d)\n",
          drawing->xkb->geom->shapes + key->xkbkey->shape_ndx,
          drawing->xkb->geom->shapes, key->xkbkey->shape_ndx);
 #endif
@@ -1114,7 +1114,7 @@ static void draw_key(MatekbdKeyboardDrawingRenderContext *context,
     color = *(drawing->colors + key->xkbkey->color_ndx);
 
 #ifdef KBDRAW_DEBUG
-  printf(
+  g_debug(
       " outlines base in the shape: %p (total: %d), origin: (%d, %d), angle "
       "%d\n",
       shape->outlines, shape->num_outlines, key->origin_x, key->origin_y,
@@ -1322,7 +1322,7 @@ static void draw_keyboard_to_context(
     MatekbdKeyboardDrawing *drawing) {
   DrawKeyboardItemData data = {drawing, context};
 #ifdef KBDRAW_DEBUG
-  printf("mods: %d\n", drawing->mods);
+  g_debug("mods: %d\n", drawing->mods);
 #endif
   g_list_foreach(drawing->keyboard_items, (GFunc)draw_keyboard_item, &data);
 }
@@ -1579,7 +1579,7 @@ static void init_indicator_doodad(MatekbdKeyboardDrawing *drawing,
     Atom *pind = drawing->xkb->names->indicators;
 
 #ifdef KBDRAW_DEBUG
-    printf("Looking for %d[%s]\n", (int)sname,
+    g_debug("Looking for %d[%s]\n", (int)sname,
            XGetAtomName(drawing->display, sname));
 #endif
 
@@ -1594,7 +1594,7 @@ static void init_indicator_doodad(MatekbdKeyboardDrawing *drawing,
                 XGetAtomName(drawing->display, sname));
     else {
 #ifdef KBDRAW_DEBUG
-      printf("Found in xkbdesc as %d\n", index);
+      g_debug("Found in xkbdesc as %d\n", index);
 #endif
       drawing->physical_indicators[index] = doodad;
       /* Trying to obtain the real state, but if fail - just assume OFF */
@@ -1633,7 +1633,7 @@ static void init_keys_and_doodads(MatekbdKeyboardDrawing *drawing) {
     guint priority;
 
 #ifdef KBDRAW_DEBUG
-    printf("initing section %d containing %d rows\n", i, section->num_rows);
+    g_debug("initing section %d containing %d rows\n", i, section->num_rows);
 #endif
     x = section->left;
     y = section->top;
@@ -1643,7 +1643,7 @@ static void init_keys_and_doodads(MatekbdKeyboardDrawing *drawing) {
       XkbRowRec *row = section->rows + j;
 
 #ifdef KBDRAW_DEBUG
-      printf("  initing row %d\n", j);
+      g_debug("  initing row %d\n", j);
 #endif
       x = section->left + row->left;
       y = section->top + row->top;
@@ -1656,7 +1656,7 @@ static void init_keys_and_doodads(MatekbdKeyboardDrawing *drawing) {
 
         if (keycode == INVALID_KEYCODE) continue;
 #ifdef KBDRAW_DEBUG
-        printf("    initing key %d, shape: %p(%p + %d), code: %u\n", k, shape,
+        g_debug("    initing key %d, shape: %p(%p + %d), code: %u\n", k, shape,
                drawing->xkb->geom->shapes, xkbkey->shape_ndx, keycode);
 #endif
         if (row->vertical)
@@ -1888,13 +1888,13 @@ static void matekbd_keyboard_drawing_init(MatekbdKeyboardDrawing *drawing) {
 
   drawing->display = GDK_DISPLAY_XDISPLAY(gdk_display_get_default());
 
-  printf("dpy: %p\n", (void *)drawing->display);
+  g_debug("dpy: %p\n", (void *)drawing->display);
 
   if (!XkbQueryExtension(drawing->display, &opcode, &drawing->xkb_event_type,
                          &error, &major, &minor))
     g_critical("XkbQueryExtension failed! Stuff probably won't work.");
 
-  printf("evt/error/major/minor: %d/%d/%d/%d\n", drawing->xkb_event_type, error,
+  g_debug("evt/error/major/minor: %d/%d/%d/%d\n", drawing->xkb_event_type, error,
          major, minor);
 
   /* XXX: this stuff probably doesn't matter.. also, gdk_screen_get_default can
@@ -2024,7 +2024,7 @@ GType matekbd_keyboard_drawing_get_type(void) {
 void matekbd_keyboard_drawing_set_mods(MatekbdKeyboardDrawing *drawing,
                                        guint mods) {
 #ifdef KBDRAW_DEBUG
-  printf("set_mods: %d\n", mods);
+  g_debug("set_mods: %d\n", mods);
 #endif
   if (mods != drawing->mods) {
     drawing->mods = mods;
@@ -2204,16 +2204,16 @@ void matekbd_keyboard_drawing_set_groups_levels(
     MatekbdKeyboardDrawing *drawing,
     MatekbdKeyboardDrawingGroupLevel *groupLevels[]) {
 #ifdef KBDRAW_DEBUG
-  printf("set_group_levels [topLeft]: %d %d \n",
+  g_debug("set_group_levels [topLeft]: %d %d \n",
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_TOPLEFT]->group,
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_TOPLEFT]->level);
-  printf("set_group_levels [topRight]: %d %d \n",
+  g_debug("set_group_levels [topRight]: %d %d \n",
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_TOPRIGHT]->group,
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_TOPRIGHT]->level);
-  printf("set_group_levels [bottomLeft]: %d %d \n",
+  g_debug("set_group_levels [bottomLeft]: %d %d \n",
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_BOTTOMLEFT]->group,
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_BOTTOMLEFT]->level);
-  printf("set_group_levels [bottomRight]: %d %d \n",
+  g_debug("set_group_levels [bottomRight]: %d %d \n",
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_BOTTOMRIGHT]->group,
          groupLevels[MATEKBD_KEYBOARD_DRAWING_POS_BOTTOMRIGHT]->level);
 #endif
